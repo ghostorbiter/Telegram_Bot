@@ -1,11 +1,12 @@
 import os
+from dotenv import load_dotenv
 import telebot
 import requests
 
-#API_KEY = os.getenv('API_KEY')   // Some problems with this part, probably because its multithreaded or async
-#                                 // Exception: Bot token is not defined
+load_dotenv()
 
-bot = telebot.TeleBot("MY_TOKEN")
+API_KEY = os.getenv('API_KEY')  
+bot = telebot.TeleBot(API_KEY)
 
 @bot.message_handler(commands=['greet'])
 def greet(message):
