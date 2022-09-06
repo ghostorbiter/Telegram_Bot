@@ -1,5 +1,6 @@
 import os
 import telebot
+import requests
 
 #API_KEY = os.getenv('API_KEY')   // Some problems with this part, probably because its multithreaded or async
 #                                 // Exception: Bot token is not defined
@@ -13,6 +14,11 @@ def greet(message):
 @bot.message_handler(commands=['hello'])
 def hello(message):
     bot.send_message(message.chat.id, "Hello!")
+
+@bot.message_handler(commands=['compliment'])
+def compliment(message):
+    response = requests.get("https://complimentr.com/api")
+    bot.reply_to(message, response.json()['compliment'])
 
 
 
